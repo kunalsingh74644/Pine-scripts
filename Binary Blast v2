@@ -1,0 +1,25 @@
+//@version=4
+study("Binary_Blast_v4", overlay=true)
+
+// Calculate EMAs
+ema200 = ema(close, 200)
+ema20 = ema(close, 20)
+ema8 = ema(close, 8)
+
+// Plot EMAs
+plot(ema200, color=color.blue, title="200 EMA")
+plot(ema20, color=color.green, title="20 EMA")
+plot(ema8, color=color.yellow, title="8 EMA")
+
+x1 = ((close+low)*(open+high))/2
+y1 = ((close+high)*(open+low))/2
+spike = (x1/y1)
+
+x = spike[1] > 1 and spike <= 1 
+y = spike[1] < 1 and spike >= 1 
+
+plotchar(x, text="Put", char="", color=color.red)
+plotchar(y, text="Call", char="", color=color.green, location=location.belowbar)
+
+plotshape(x, style=shape.triangledown, location=location.abovebar, color=color.red)
+plotshape(y, style=shape.triangleup, location=location.belowbar, color=color.green)
