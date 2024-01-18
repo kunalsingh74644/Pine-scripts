@@ -1,0 +1,24 @@
+//@version=2
+study("Binary_Blast_v3", overlay=true)
+
+
+
+
+x1 = ((close+low)*(open+high))/2
+y1 = ((close+high)*(open+low))/2
+spike = (x1/y1)
+
+
+x = spike[1] > 1 and spike <= 1 
+
+y =   spike[1] < 1 and spike >= 1 
+
+
+
+
+
+plotchar(x,text="Put",char="",color=red)
+plotchar(y,text="Call",char="",color=green,location=location.belowbar)
+
+plotshape(x, style=shape.triangledown,location=location.abovebar, color=red)
+plotshape(y, style=shape.triangleup,location=location.belowbar, color=green)
